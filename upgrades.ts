@@ -1,0 +1,995 @@
+import { t } from "./i18n/i18n";
+
+import { PerkId } from "./types";
+
+import {
+  base_combo_from_stronger_foundation,
+  comboKeepingRate,
+} from "./pure_functions";
+
+// Those perks are excluded from creative mode
+export const noCreative: PerkId[] = [
+  "extra_levels",
+  "shunt",
+  "one_more_choice",
+  "chill",
+];
+
+export const categories = {
+  beginner: 1,
+  combo: 2,
+  combo_boost: 2.5,
+  simple: 3,
+  advanced: 4,
+};
+
+export const rawUpgrades = [
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 0,
+    gift: false,
+    id: "slow_down", // slow ball
+    max: 2,
+    name: t("upgrades.slow_down.name"),
+    help: (lvl: number) => t("upgrades.slow_down.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.slow_down.verbose_description", { lvl }),
+  },
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 0,
+    gift: false,
+    id: "extra_life",
+    max: 7,
+    name: t("upgrades.extra_life.name"),
+    help: (lvl: number) => t("upgrades.extra_life.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.extra_life.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 0,
+    gift: false,
+    id: "bigger_puck", // bigger paddle
+    max: 2,
+    name: t("upgrades.bigger_puck.name"),
+    help: () => t("upgrades.bigger_puck.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.bigger_puck.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 50,
+    gift: false,
+    id: "skip_last",
+    max: 7,
+    name: t("upgrades.skip_last.name"),
+    help: (lvl: number) => t("upgrades.skip_last.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.skip_last.verbose_description", { lvl }),
+  },
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 500,
+    id: "telekinesis",
+    gift: true,
+    max: 1,
+    name: t("upgrades.telekinesis.name"),
+    help: (lvl: number) => t("upgrades.telekinesis.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.telekinesis.verbose_description", { lvl }),
+  },
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 600,
+    gift: false,
+    id: "yoyo",
+    max: 1,
+    name: t("upgrades.yoyo.name"),
+    help: (lvl: number) => t("upgrades.yoyo.tooltip"),
+    fullHelp: (lvl: number) => t("upgrades.yoyo.verbose_description", { lvl }),
+  },
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 750,
+    gift: false,
+    id: "one_more_choice",
+    max: 3,
+    name: t("upgrades.one_more_choice.name"),
+    help: (lvl: number) => t("upgrades.one_more_choice.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.one_more_choice.verbose_description", { lvl }),
+  },
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 950,
+    gift: false,
+    id: "concave_puck",
+    max: 1,
+    name: t("upgrades.concave_puck.name"),
+    help: (lvl: number) => t("upgrades.concave_puck.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.concave_puck.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 100,
+    id: "streak_shots",
+    gift: true,
+    max: 1,
+    name: t("upgrades.streak_shots.name"),
+    help: (lvl: number) => t("upgrades.streak_shots.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.streak_shots.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 200,
+    id: "left_is_lava",
+    gift: true,
+    max: 1,
+    name: t("upgrades.left_is_lava.name"),
+    help: (lvl: number) => t("upgrades.left_is_lava.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.left_is_lava.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 300,
+    id: "right_is_lava",
+    gift: true,
+    max: 1,
+    name: t("upgrades.right_is_lava.name"),
+    help: (lvl: number) => t("upgrades.right_is_lava.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.right_is_lava.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 400,
+    id: "top_is_lava",
+    gift: true,
+    max: 1,
+    name: t("upgrades.top_is_lava.name"),
+    help: (lvl: number) => t("upgrades.top_is_lava.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.top_is_lava.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 4000,
+    id: "hot_start",
+    gift: true,
+    max: 3,
+    name: t("upgrades.hot_start.name"),
+    help: (lvl: number) =>
+      t("upgrades.hot_start.tooltip", {
+        start: lvl * 30 + 1,
+        loss: lvl,
+      }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.hot_start.verbose_description", {
+        start: lvl * 30 + 1,
+        loss: lvl,
+      }),
+  },
+
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 2000,
+    id: "picky_eater",
+    gift: true,
+    max: 1,
+    name: t("upgrades.picky_eater.name"),
+    help: (lvl: number) => t("upgrades.picky_eater.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.picky_eater.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 3000,
+    id: "compound_interest",
+    gift: true,
+    max: 1,
+    name: t("upgrades.compound_interest.name"),
+    help: (lvl: number) => t("upgrades.compound_interest.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.compound_interest.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 150000,
+    gift: true,
+    id: "side_kick",
+    max: 3,
+    name: t("upgrades.side_kick.name"),
+    help: (lvl: number) =>
+      t("upgrades.side_kick.tooltip", { lvl, loss: lvl * 2 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.side_kick.verbose_description", { lvl, loss: lvl * 2 }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 150000,
+    gift: true,
+    id: "side_flip",
+    max: 3,
+    name: t("upgrades.side_flip.name"),
+    help: (lvl: number) =>
+      t("upgrades.side_flip.tooltip", { lvl, loss: lvl * 2 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.side_flip.verbose_description", { lvl, loss: lvl * 2 }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 135000,
+    // a bit too hard when starting up
+    gift: false,
+    id: "reach",
+    max: 1,
+    name: t("upgrades.reach.name"),
+    help: (lvl: number) => t("upgrades.reach.tooltip", { lvl }),
+    fullHelp: (lvl: number) => t("upgrades.reach.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "multiball",
+    threshold: 245000,
+    gift: false,
+    id: "happy_family",
+    max: 1,
+    name: t("upgrades.happy_family.name"),
+    help: () => t("upgrades.happy_family.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.happy_family.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 165000,
+    gift: false,
+    id: "addiction",
+    max: 7,
+    name: t("upgrades.addiction.name"),
+    help: (lvl: number) =>
+      t("upgrades.addiction.tooltip", { lvl, delay: (5 / lvl).toFixed(2) }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.addiction.verbose_description", {
+        lvl,
+        delay: (5 / lvl).toFixed(2),
+      }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 90000,
+    gift: true,
+    id: "nbricks",
+    max: 3,
+    name: t("upgrades.nbricks.name"),
+    help: (lvl: number) => t("upgrades.nbricks.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.nbricks.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 230000,
+    gift: false,
+    id: "three_cushion",
+    max: 1,
+    name: t("upgrades.three_cushion.name"),
+    help: (lvl: number) =>
+      t("upgrades.three_cushion.tooltip", { max: lvl * 3 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.three_cushion.verbose_description", { max: lvl * 3 }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 115000,
+    gift: true,
+    id: "trampoline",
+    max: 1,
+    name: t("upgrades.trampoline.name"),
+    help: (lvl: number) => t("upgrades.trampoline.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.trampoline.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 105000,
+    gift: true,
+    id: "zen",
+    max: 1,
+    name: t("upgrades.zen.name"),
+    help: (lvl: number) => t("upgrades.zen.tooltip", { lvl }),
+    fullHelp: (lvl: number) => t("upgrades.zen.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 70000,
+    gift: true,
+    id: "asceticism",
+    max: 1,
+    name: t("upgrades.asceticism.name"),
+    help: (lvl: number) => t("upgrades.asceticism.tooltip", { combo: lvl * 3 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.asceticism.verbose_description", { combo: lvl * 3 }),
+  },
+  //   Regular
+
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 15000,
+    gift: false,
+    id: "pierce_color",
+    max: 4,
+    name: t("upgrades.pierce_color.name"),
+    help: (lvl: number) => t("upgrades.pierce_color.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.pierce_color.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 1500,
+    id: "pierce",
+    gift: false,
+    max: 3,
+    name: t("upgrades.pierce.name"),
+    help: (lvl: number) => t("upgrades.pierce.tooltip", { count: 3 * lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.pierce.verbose_description", { count: 3 * lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 800,
+    id: "multiball",
+    gift: true,
+    max: 6,
+    name: t("upgrades.multiball.name"),
+    help: (lvl: number) => t("upgrades.multiball.tooltip", { count: lvl + 1 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.multiball.verbose_description", { count: lvl + 1 }),
+  },
+  {
+    category: categories.advanced,
+    requires: "multiball",
+    threshold: 21000,
+    gift: false,
+    id: "ball_repulse_ball", // personal space
+    max: 3,
+    name: t("upgrades.ball_repulse_ball.name"),
+    help: (lvl: number) => t("upgrades.ball_repulse_ball.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.ball_repulse_ball.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "multiball",
+    threshold: 25000,
+    gift: false,
+    id: "ball_attract_ball", // gravity
+    max: 3,
+    name: t("upgrades.ball_attract_ball.name"),
+    help: (lvl: number) => t("upgrades.ball_attract_ball.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.ball_attract_ball.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 30000,
+    gift: false,
+    id: "puck_repulse_ball",
+    max: 2,
+    name: t("upgrades.puck_repulse_ball.name"),
+    help: (lvl: number) => t("upgrades.puck_repulse_ball.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.puck_repulse_ball.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 35000,
+    gift: false,
+    id: "wind",
+    max: 3,
+    name: t("upgrades.wind.name"),
+    help: (lvl: number) => t("upgrades.wind.tooltip"),
+    fullHelp: (lvl: number) => t("upgrades.wind.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 65000,
+    gift: false,
+    id: "helium",
+    max: 3,
+    name: t("upgrades.helium.name"),
+    help: (lvl: number) => t("upgrades.helium.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.helium.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 200000,
+    gift: false,
+    id: "bricks_attract_coins",
+    max: 3,
+    name: t("upgrades.bricks_attract_coins.name"),
+    help: (lvl: number) => t("upgrades.bricks_attract_coins.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.bricks_attract_coins.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 240000,
+    gift: false,
+    id: "wrap_left",
+    max: 1,
+    name: t("upgrades.wrap_left.name"),
+    help: () => t("upgrades.wrap_left.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.wrap_left.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 245000,
+    gift: false,
+    id: "wrap_right",
+    max: 1,
+    name: t("upgrades.wrap_right.name"),
+    help: () => t("upgrades.wrap_right.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.wrap_right.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 45000,
+    gift: false,
+    id: "respawn",
+    max: 4,
+    name: t("upgrades.respawn.name"),
+    help: (lvl: number) =>
+      t("upgrades.respawn.tooltip", {
+        percent: Math.floor(100 * comboKeepingRate(lvl)),
+        delay: (3 / lvl).toFixed(2),
+      }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.respawn.verbose_description", {
+        percent: Math.floor(100 * comboKeepingRate(lvl)),
+        delay: (3 / lvl).toFixed(2),
+      }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 55000,
+    gift: false,
+    id: "double_or_nothing",
+    max: 3,
+    name: t("upgrades.double_or_nothing.name"),
+    help: (lvl: number) =>
+      t("upgrades.double_or_nothing.tooltip", {
+        percent: lvl * 10,
+        multiplier: 1 + lvl,
+      }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.double_or_nothing.verbose_description", {
+        percent: lvl * 10,
+        multiplier: 1 + lvl,
+      }),
+  },
+
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 75000,
+    gift: false,
+    id: "unbounded",
+    max: 3,
+    name: t("upgrades.unbounded.name"),
+    help: (lvl: number) => t("upgrades.unbounded.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.unbounded.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 95000,
+    gift: false,
+    id: "etherealcoins",
+    max: 1,
+    name: t("upgrades.etherealcoins.name"),
+    help: (lvl: number) => t("upgrades.etherealcoins.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.etherealcoins.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "multiball",
+    threshold: 100000,
+    gift: false,
+    id: "shocks",
+    max: 1,
+    name: t("upgrades.shocks.name"),
+    help: (lvl: number) => t("upgrades.shocks.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.shocks.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 110000,
+    gift: false,
+    id: "sacrifice",
+    max: 1,
+    name: t("upgrades.sacrifice.name"),
+    help: (lvl: number) => t("upgrades.sacrifice.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.sacrifice.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 120000,
+    gift: false,
+    id: "ghost_coins",
+    max: 3,
+    name: t("upgrades.ghost_coins.name"),
+    help: (lvl: number) => t("upgrades.ghost_coins.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.ghost_coins.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 125000,
+    gift: false,
+    id: "forgiving",
+    max: 1,
+    name: t("upgrades.forgiving.name"),
+    help: (lvl: number) => t("upgrades.forgiving.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.forgiving.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 130000,
+    gift: false,
+    id: "ball_attracts_coins",
+    max: 3,
+    name: t("upgrades.ball_attracts_coins.name"),
+    help: (lvl: number) => t("upgrades.ball_attracts_coins.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.ball_attracts_coins.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 145000,
+    gift: false,
+    id: "clairvoyant",
+    max: 1,
+    name: t("upgrades.clairvoyant.name"),
+    help: (lvl: number) => t("upgrades.clairvoyant.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.clairvoyant.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 155000,
+    gift: false,
+    id: "implosions",
+    max: 1,
+    name: t("upgrades.implosions.name"),
+    help: (lvl: number) => t("upgrades.implosions.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.implosions.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 160000,
+    gift: false,
+    id: "corner_shot",
+    max: 1,
+    name: t("upgrades.corner_shot.name"),
+    help: (lvl: number) => t("upgrades.corner_shot.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.corner_shot.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 175000,
+    gift: false,
+    id: "limitless",
+    max: 1,
+    name: t("upgrades.limitless.name"),
+    help: (lvl: number) => t("upgrades.limitless.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.limitless.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 185000,
+    gift: false,
+    id: "trickledown",
+    max: 1,
+    name: t("upgrades.trickledown.name"),
+    help: (lvl: number) => t("upgrades.trickledown.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.trickledown.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 190000,
+    gift: false,
+    id: "transparency",
+    max: 3,
+    name: t("upgrades.transparency.name"),
+    help: (lvl: number) =>
+      t("upgrades.transparency.tooltip", { lvl, percent: lvl * 50 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.transparency.verbose_description", {
+        lvl,
+        percent: lvl * 50,
+      }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 195000,
+    gift: false,
+    id: "superhot",
+    max: 3,
+    name: t("upgrades.superhot.name"),
+    help: (lvl: number) => t("upgrades.superhot.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.superhot.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 205000,
+    gift: false,
+    id: "rainbow",
+    max: 7,
+    name: t("upgrades.rainbow.name"),
+    help: (lvl: number) => t("upgrades.rainbow.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.rainbow.verbose_description", { lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 210000,
+    gift: false,
+    id: "golden_goose",
+    max: 1,
+    name: t("upgrades.golden_goose.name"),
+    help: (lvl: number) => t("upgrades.golden_goose.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.golden_goose.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 215000,
+    gift: false,
+    id: "bricks_attract_ball",
+    max: 1,
+    name: t("upgrades.bricks_attract_ball.name"),
+    help: (lvl: number) =>
+      t("upgrades.bricks_attract_ball.tooltip", { count: lvl * 3 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.bricks_attract_ball.verbose_description", { count: lvl * 3 }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 220000,
+    gift: false,
+    id: "buoy",
+    max: 3,
+    name: t("upgrades.buoy.name"),
+    help: (lvl: number) => t("upgrades.buoy.tooltip", { duration: lvl * 0.5 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.buoy.verbose_description", { duration: lvl * 0.5 }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 225000,
+    gift: false,
+    id: "ottawa_treaty",
+    max: 1,
+    name: t("upgrades.ottawa_treaty.name"),
+    help: () => t("upgrades.ottawa_treaty.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.ottawa_treaty.verbose_description", { lvl }),
+  },
+
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 235000,
+    gift: false,
+    id: "sticky_coins",
+    max: 1,
+    name: t("upgrades.sticky_coins.name"),
+    help: (lvl: number) => t("upgrades.sticky_coins.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.sticky_coins.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 0,
+    id: "base_combo", //strong foundations
+    gift: true,
+    max: 7,
+    name: t("upgrades.base_combo.name"),
+    help: (lvl: number) =>
+      t("upgrades.base_combo.tooltip", {
+        coins: base_combo_from_stronger_foundation(lvl),
+      }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.base_combo.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 0,
+    gift: false,
+    id: "viscosity",
+    max: 3,
+    name: t("upgrades.viscosity.name"),
+    help: () => t("upgrades.viscosity.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.viscosity.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 700,
+    gift: false,
+    id: "coin_magnet",
+    max: 3,
+    name: t("upgrades.coin_magnet.name"),
+    help: (lvl: number) => t("upgrades.coin_magnet.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.coin_magnet.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 1000,
+    gift: false,
+    id: "smaller_puck",
+    max: 2,
+    name: t("upgrades.smaller_puck.name"),
+    help: (lvl: number) =>
+      t("upgrades.smaller_puck.tooltip", { percent: 50 * lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.smaller_puck.verbose_description", { percent: 50 * lvl }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 2500,
+    gift: false,
+    id: "metamorphosis",
+    max: 1,
+    name: t("upgrades.metamorphosis.name"),
+    help: (lvl: number) => t("upgrades.metamorphosis.tooltip", { lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.metamorphosis.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 6000,
+    id: "sapper",
+    gift: false,
+    max: 7,
+    name: t("upgrades.sapper.name"),
+    help: (lvl: number) => t("upgrades.sapper.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.sapper.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 9000,
+    id: "bigger_explosions", // kaboom
+    gift: false,
+    max: 1,
+    name: t("upgrades.bigger_explosions.name"),
+    help: (lvl: number) => t("upgrades.bigger_explosions.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.bigger_explosions.verbose_description", { lvl }),
+  },
+  {
+    category: categories.simple,
+    requires: "",
+    threshold: 13000,
+    gift: false,
+    adventure: false,
+    id: "extra_levels",
+    max: 3,
+    name: t("upgrades.extra_levels.name"),
+    help: (lvl: number) =>
+      t("upgrades.extra_levels.tooltip", { count: lvl + 7 }),
+    fullHelp: (lvl: number) => t("upgrades.extra_levels.verbose_description"),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 170000,
+    gift: false,
+    id: "fountain_toss",
+    max: 7,
+    name: t("upgrades.fountain_toss.name"),
+    help: () => t("upgrades.fountain_toss.tooltip"),
+    fullHelp: (lvl: number) =>
+      t("upgrades.fountain_toss.verbose_description", { lvl }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 180000,
+    gift: false,
+    id: "minefield",
+    max: 3,
+    name: t("upgrades.minefield.name"),
+    help: (lvl: number) =>
+      t("upgrades.minefield.tooltip", { percent: 10 * lvl }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.minefield.verbose_description", { percent: 10 * lvl }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 18000,
+    gift: false,
+    id: "soft_reset",
+    max: 3,
+    name: t("upgrades.soft_reset.name"),
+    help: (lvl: number) =>
+      t("upgrades.soft_reset.tooltip", {
+        percent: Math.round(comboKeepingRate(lvl) * 100),
+      }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.soft_reset.verbose_description", {
+        percent: Math.round(comboKeepingRate(lvl) * 100),
+      }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 80000,
+    gift: false,
+    id: "shunt",
+    max: 3,
+    name: t("upgrades.shunt.name"),
+    help: (lvl: number) =>
+      t("upgrades.shunt.tooltip", {
+        percent: Math.round(comboKeepingRate(lvl) * 100),
+      }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.shunt.verbose_description", {
+        percent: Math.round(comboKeepingRate(lvl) * 100),
+      }),
+  },
+  {
+    category: categories.combo,
+    requires: "",
+    threshold: 140000,
+    gift: true,
+    id: "passive_income",
+    max: 4,
+    name: t("upgrades.passive_income.name"),
+    help: (lvl: number) =>
+      t("upgrades.passive_income.tooltip", {
+        time: (lvl * 0.1 - 0.05).toFixed(2),
+        lvl,
+      }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.passive_income.verbose_description", {
+        time: (lvl * 0.1 - 0.05).toFixed(2),
+        lvl,
+      }),
+  },
+  {
+    category: categories.combo_boost,
+    requires: "",
+    threshold: 40000,
+    gift: false,
+    id: "sturdy_bricks",
+    max: 4,
+    name: t("upgrades.sturdy_bricks.name"),
+    help: (lvl: number) =>
+      t("upgrades.sturdy_bricks.tooltip", { lvl, percent: lvl * 50 }),
+    fullHelp: (lvl: number) =>
+      t("upgrades.sturdy_bricks.verbose_description", {
+        lvl,
+        percent: lvl * 50,
+      }),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 250000,
+    gift: false,
+    id: "steering",
+    max: 4,
+    name: t("upgrades.steering.name"),
+    help: (lvl: number) => t("upgrades.steering.tooltip"),
+    fullHelp: (lvl: number) => t("upgrades.steering.verbose_description"),
+  },
+  {
+    category: categories.advanced,
+    requires: "",
+    threshold: 255000,
+    gift: false,
+    id: "wrap_up",
+    max: 1,
+    name: t("upgrades.wrap_up.name"),
+    help: (lvl: number) => t("upgrades.wrap_up.tooltip"),
+    fullHelp: (lvl: number) => t("upgrades.wrap_up.verbose_description"),
+  },
+  {
+    category: categories.beginner,
+    requires: "",
+    threshold: 5000,
+    gift: false,
+    id: "chill",
+    max: 1,
+    name: t("upgrades.chill.name"),
+    help: (lvl: number) => t("upgrades.chill.tooltip"),
+    fullHelp: (lvl: number) => t("upgrades.chill.verbose_description"),
+  },
+] as const;
