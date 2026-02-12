@@ -49,11 +49,6 @@
     "required": ["ball_repulse_ball", "puck_repulse_ball", "nbricks"],
     "forbidden": ["hot_start", "respawn", "etherealcoins"]
   },
-  "Rocket": {
-    "minScore": 9500,
-    "required": ["etherealcoins", "soft_reset", "asceticism"],
-    "forbidden": ["coin_magnet", "hot_start", "bigger_puck"]
-  },
   "Leaf": {
     "minScore": 9800,
     "required": ["concave_puck", "sacrifice", "puck_repulse_ball"],
@@ -244,11 +239,6 @@
     "forbidden": ["picky_eater", "trampoline", "clairvoyant"],
     "minScore": 14600
   },
-  "Nova drift": {
-    "required": ["rainbow", "ghost_coins", "sacrifice"],
-    "forbidden": ["picky_eater", "pierce", "wrap_right"],
-    "minScore": 14700
-  },
   "Enter the gungeon": {
     "required": ["shocks", "sapper", "smaller_puck"],
     "forbidden": ["pierce", "implosions", "wrap_right"],
@@ -434,11 +424,6 @@
     "forbidden": ["fountain_toss", "bricks_attract_coins", "passive_income"],
     "minScore": 19500
   },
-  "Floaty Ghost": {
-    "required": ["sacrifice", "extra_life", "transparency"],
-    "forbidden": ["respawn"],
-    "minScore": 4139
-  },
   "Japan": {
     "required": ["addiction", "minefield", "trampoline"],
     "forbidden": ["ottawa_treaty", "right_is_lava", "ball_repulse_ball"],
@@ -519,11 +504,6 @@
     "forbidden": [],
     "minScore": 19920
   },
-  "Bouquet": {
-    "required": ["fountain_toss", "unbounded"],
-    "forbidden": ["yoyo", "extra_levels"],
-    "minScore": 805
-  },
   "Bench proposal": {
     "required": ["golden_goose", "wind", "sturdy_bricks"],
     "forbidden": ["asceticism"],
@@ -558,11 +538,6 @@
     "required": ["passive_income", "minefield", "bigger_explosions"],
     "forbidden": ["shocks", "sapper", "corner_shot"],
     "minScore": 22300
-  },
-  "Czech Republic": {
-    "required": ["golden_goose", "corner_shot", "sacrifice"],
-    "forbidden": ["clairvoyant", "three_cushion", "metamorphosis"],
-    "minScore": 22400
   },
   "Slovakia": {
     "required": ["respawn", "soft_reset", "clairvoyant"],
