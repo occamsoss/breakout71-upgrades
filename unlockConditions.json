@@ -144,11 +144,6 @@
     "required": ["picky_eater", "nbricks", "addiction"],
     "forbidden": ["minefield", "sturdy_bricks", "ghost_coins"]
   },
-  "Abstract 12": {
-    "minScore": 12300,
-    "required": ["ghost_coins", "sacrifice", "ball_attracts_coins"],
-    "forbidden": ["concave_puck", "picky_eater", "compound_interest"]
-  },
   "Abstract 13": {
     "minScore": 12400,
     "required": ["ball_attract_ball", "streak_shots", "ghost_coins"],
@@ -253,11 +248,6 @@
     "required": ["rainbow", "ghost_coins", "sacrifice"],
     "forbidden": ["picky_eater", "pierce", "wrap_right"],
     "minScore": 14700
-  },
-  "Noita": {
-    "required": ["nbricks", "ghost_coins", "golden_goose"],
-    "forbidden": ["forgiving", "picky_eater", "viscosity"],
-    "minScore": 14900
   },
   "Enter the gungeon": {
     "required": ["shocks", "sapper", "smaller_puck"],
@@ -424,11 +414,6 @@
     "forbidden": ["bigger_explosions", "bigger_puck", "telekinesis"],
     "minScore": 18400
   },
-  "Chess - King Piece": {
-    "required": ["nbricks", "smaller_puck"],
-    "forbidden": [],
-    "minScore": 18900
-  },
   "L'Angélus": {
     "required": ["steering", "rainbow", "ghost_coins"],
     "forbidden": ["hot_start", "addiction", "base_combo"],
@@ -483,11 +468,6 @@
     "required": ["rainbow", "superhot", "right_is_lava"],
     "forbidden": ["happy_family", "ghost_coins", "sturdy_bricks"],
     "minScore": 20300
-  },
-  "Michaelsoft Binbows": {
-    "required": ["sturdy_bricks", "respawn"],
-    "forbidden": ["one_more_choice", "zen", "ottawa_treaty"],
-    "minScore": 19960
   },
   "Snowglobe": {
     "required": ["wind", "viscosity", "ghost_coins"],
