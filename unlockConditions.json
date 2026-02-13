@@ -9,11 +9,6 @@
     "required": ["zen", "sacrifice", "coin_magnet"],
     "forbidden": ["respawn", "bigger_puck", "top_is_lava"]
   },
-  "Balloon": {
-    "minScore": 8400,
-    "required": ["soft_reset", "coin_magnet", "zen"],
-    "forbidden": ["concave_puck", "sacrifice", "bigger_puck"]
-  },
   "Opening": {
     "minScore": 8500,
     "required": ["streak_shots", "bigger_puck", "top_is_lava"],
@@ -134,11 +129,6 @@
     "required": ["shocks", "sapper", "clairvoyant"],
     "forbidden": ["passive_income", "picky_eater", "pierce"]
   },
-  "Abstract 11": {
-    "minScore": 12200,
-    "required": ["picky_eater", "nbricks", "addiction"],
-    "forbidden": ["minefield", "sturdy_bricks", "ghost_coins"]
-  },
   "Abstract 13": {
     "minScore": 12400,
     "required": ["ball_attract_ball", "streak_shots", "ghost_coins"],
@@ -173,11 +163,6 @@
     "required": ["clairvoyant", "reach", "double_or_nothing"],
     "forbidden": ["nbricks", "corner_shot", "smaller_puck"],
     "minScore": 13300
-  },
-  "Fish": {
-    "required": ["reach", "pierce", "picky_eater"],
-    "forbidden": ["sapper", "shocks", "ghost_coins"],
-    "minScore": 13400
   },
   "Spider": {
     "required": ["transparency", "ghost_coins", "left_is_lava"],
@@ -513,11 +498,6 @@
     "required": ["nbricks", "fountain_toss", "slow_down"],
     "forbidden": ["clairvoyant"],
     "minScore": 12345
-  },
-  "Trans Flag": {
-    "required": ["chill", "reach", "nbricks"],
-    "forbidden": ["puck_repulse_ball", "right_is_lava", "hot_start"],
-    "minScore": 21600
   },
   "f-droid": {
     "required": ["happy_family", "respawn", "wrap_left"],
