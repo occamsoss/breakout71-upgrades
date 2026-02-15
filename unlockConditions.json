@@ -454,11 +454,6 @@
     "forbidden": ["bigger_puck", "pierce"],
     "minScore": 10000
   },
-  "Wild Cat": {
-    "required": ["asceticism", "sapper", "sticky_coins"],
-    "forbidden": ["golden_goose"],
-    "minScore": 10000
-  },
   "67": {
     "required": ["bricks_attract_ball", "asceticism", "double_or_nothing"],
     "forbidden": ["reach", "ball_attract_ball", "chill"],
