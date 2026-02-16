@@ -14,11 +14,6 @@
     "required": ["streak_shots", "bigger_puck", "top_is_lava"],
     "forbidden": ["zen", "etherealcoins", "coin_magnet"]
   },
-  "You are here": {
-    "minScore": 8700,
-    "required": ["zen", "forgiving", "telekinesis"],
-    "forbidden": ["smaller_puck", "viscosity", "top_is_lava"]
-  },
   "Play": {
     "minScore": 8900,
     "required": ["zen", "right_is_lava", "skip_last"],
@@ -214,11 +209,6 @@
     "forbidden": ["puck_repulse_ball", "clairvoyant", "nbricks"],
     "minScore": 14400
   },
-  "Bzh": {
-    "required": ["clairvoyant", "addiction", "corner_shot"],
-    "forbidden": ["minefield", "base_combo", "picky_eater"],
-    "minScore": 14500
-  },
   "FTL": {
     "required": ["bigger_explosions", "minefield", "happy_family"],
     "forbidden": ["picky_eater", "trampoline", "clairvoyant"],
@@ -354,11 +344,6 @@
     "forbidden": ["bricks_attract_coins", "metamorphosis", "slow_down"],
     "minScore": 18200
   },
-  "Palestine": {
-    "required": ["smaller_puck", "compound_interest", "superhot"],
-    "forbidden": ["coin_magnet", "bigger_puck", "helium"],
-    "minScore": 18300
-  },
   "Never Gonna Give You Up": {
     "required": ["respawn", "superhot", "sturdy_bricks"],
     "forbidden": ["multiball", "pierce", "pierce_color"],
@@ -378,11 +363,6 @@
     "required": ["concave_puck", "hot_start", "bigger_explosions"],
     "forbidden": ["etherealcoins", "chill", "reach"],
     "minScore": 18700
-  },
-  "Lockpicking": {
-    "required": ["ghost_coins", "telekinesis", "smaller_puck"],
-    "forbidden": ["puck_repulse_ball", "bigger_puck", "pierce"],
-    "minScore": 18300
   },
   "Eruption": {
     "required": ["implosions", "happy_family", "golden_goose"],
@@ -418,11 +398,6 @@
     "required": ["sapper", "shocks", "golden_goose"],
     "forbidden": ["wrap_up", "pierce", "sturdy_bricks"],
     "minScore": 19900
-  },
-  "Banana Peel": {
-    "required": ["clairvoyant", "sacrifice", "fountain_toss"],
-    "forbidden": ["soft_reset", "asceticism", "nbricks"],
-    "minScore": 20000
   },
   "Emoji Cry": {
     "required": ["ball_attract_ball", "picky_eater", "double_or_nothing"],
@@ -483,11 +458,6 @@
     "required": ["zen", "minefield", "bigger_explosions"],
     "forbidden": [],
     "minScore": 19920
-  },
-  "Bench proposal": {
-    "required": ["golden_goose", "wind", "sturdy_bricks"],
-    "forbidden": ["asceticism"],
-    "minScore": 8000
   },
   "Effeuiller la marguerite": {
     "required": ["nbricks", "fountain_toss", "slow_down"],
