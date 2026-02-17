@@ -9,11 +9,6 @@
     "required": ["streak_shots", "bigger_puck", "top_is_lava"],
     "forbidden": ["zen", "etherealcoins", "coin_magnet"]
   },
-  "Play": {
-    "minScore": 8900,
-    "required": ["zen", "right_is_lava", "skip_last"],
-    "forbidden": ["ball_attracts_coins", "telekinesis", "unbounded"]
-  },
   "Note": {
     "minScore": 9400,
     "required": ["ball_repulse_ball", "puck_repulse_ball", "nbricks"],
