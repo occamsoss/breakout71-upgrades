@@ -1,9 +1,4 @@
 {
-  "Dog 8": {
-    "minScore": 8200,
-    "required": ["zen", "ball_attract_ball", "coin_magnet"],
-    "forbidden": ["sacrifice", "sturdy_bricks", "bigger_puck"]
-  },
   "Sunglasses": {
     "minScore": 8300,
     "required": ["zen", "sacrifice", "coin_magnet"],
@@ -23,11 +18,6 @@
     "minScore": 9000,
     "required": ["passive_income", "asceticism", "soft_reset"],
     "forbidden": ["hot_start", "ball_repulse_ball", "base_combo"]
-  },
-  "Graph": {
-    "minScore": 9200,
-    "required": ["hot_start", "shocks", "sapper"],
-    "forbidden": ["pierce", "ball_attract_ball", "ball_attracts_coins"]
   },
   "Lightbulb": {
     "minScore": 9300,
@@ -63,11 +53,6 @@
     "minScore": 10500,
     "required": ["sapper", "shocks", "soft_reset"],
     "forbidden": ["bigger_explosions", "pierce", "skip_last"]
-  },
-  "Noodlemire": {
-    "minScore": 10600,
-    "required": ["skip_last", "concave_puck", "passive_income"],
-    "forbidden": ["ball_attract_ball", "side_flip", "side_kick"]
   },
   "Lebanon": {
     "minScore": 10800,
