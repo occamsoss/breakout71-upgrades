@@ -14,16 +14,6 @@
     "required": ["zen", "right_is_lava", "skip_last"],
     "forbidden": ["ball_attracts_coins", "telekinesis", "unbounded"]
   },
-  "City": {
-    "minScore": 9000,
-    "required": ["passive_income", "asceticism", "soft_reset"],
-    "forbidden": ["hot_start", "ball_repulse_ball", "base_combo"]
-  },
-  "Lightbulb": {
-    "minScore": 9300,
-    "required": ["hot_start", "passive_income", "helium"],
-    "forbidden": ["trampoline", "ball_attracts_coins", "pierce"]
-  },
   "Note": {
     "minScore": 9400,
     "required": ["ball_repulse_ball", "puck_repulse_ball", "nbricks"],
