@@ -1,28 +1,8 @@
 {
-  "Sunglasses": {
-    "minScore": 8300,
-    "required": ["zen", "sacrifice", "coin_magnet"],
-    "forbidden": ["respawn", "bigger_puck", "top_is_lava"]
-  },
-  "Opening": {
-    "minScore": 8500,
-    "required": ["streak_shots", "bigger_puck", "top_is_lava"],
-    "forbidden": ["zen", "etherealcoins", "coin_magnet"]
-  },
-  "Note": {
-    "minScore": 9400,
-    "required": ["ball_repulse_ball", "puck_repulse_ball", "nbricks"],
-    "forbidden": ["hot_start", "respawn", "etherealcoins"]
-  },
   "Leaf": {
     "minScore": 9800,
     "required": ["concave_puck", "sacrifice", "puck_repulse_ball"],
     "forbidden": ["coin_magnet", "trampoline", "ball_repulse_ball"]
-  },
-  "Abstract 5": {
-    "minScore": 10200,
-    "required": ["ball_attracts_coins", "implosions", "forgiving"],
-    "forbidden": ["viscosity", "base_combo", "unbounded"]
   },
   "Abstract 6": {
     "minScore": 10300,
@@ -59,20 +39,10 @@
     "required": ["nbricks", "ghost_coins", "trampoline"],
     "forbidden": ["picky_eater", "clairvoyant", "corner_shot"]
   },
-  "Korea": {
-    "minScore": 11200,
-    "required": ["puck_repulse_ball", "ball_attracts_coins", "ball_repulse_ball"],
-    "forbidden": ["ghost_coins", "picky_eater", "etherealcoins"]
-  },
   "Türkiye": {
     "minScore": 11400,
     "required": ["compound_interest", "fountain_toss", "concave_puck"],
     "forbidden": ["bigger_explosions", "superhot", "respawn"]
-  },
-  "Abstract 7": {
-    "minScore": 11600,
-    "required": ["hot_start", "nbricks", "streak_shots"],
-    "forbidden": ["trampoline", "smaller_puck", "superhot"]
   },
   "Abstract 9": {
     "minScore": 11700,
@@ -179,11 +149,6 @@
     "forbidden": ["puck_repulse_ball", "clairvoyant", "nbricks"],
     "minScore": 14400
   },
-  "FTL": {
-    "required": ["bigger_explosions", "minefield", "happy_family"],
-    "forbidden": ["picky_eater", "trampoline", "clairvoyant"],
-    "minScore": 14600
-  },
   "Enter the gungeon": {
     "required": ["shocks", "sapper", "smaller_puck"],
     "forbidden": ["pierce", "implosions", "wrap_right"],
@@ -203,11 +168,6 @@
     "required": ["puck_repulse_ball", "respawn", "soft_reset"],
     "forbidden": ["ball_repulse_ball", "skip_last", "unbounded"],
     "minScore": 15300
-  },
-  "Teleglitch": {
-    "required": ["happy_family", "skip_last", "ball_attracts_coins"],
-    "forbidden": ["side_flip", "side_kick", "corner_shot"],
-    "minScore": 15400
   },
   "Piñata": {
     "required": ["bricks_attract_ball", "wrap_right", "corner_shot"],
@@ -329,11 +289,6 @@
     "forbidden": [],
     "minScore": 420
   },
-  "Huginn & Muninn": {
-    "required": ["concave_puck", "hot_start", "bigger_explosions"],
-    "forbidden": ["etherealcoins", "chill", "reach"],
-    "minScore": 18700
-  },
   "Eruption": {
     "required": ["implosions", "happy_family", "golden_goose"],
     "forbidden": ["bigger_explosions", "bigger_puck", "telekinesis"],
@@ -373,11 +328,6 @@
     "required": ["ball_attract_ball", "picky_eater", "double_or_nothing"],
     "forbidden": ["transparency", "left_is_lava", "pierce_color"],
     "minScore": 20100
-  },
-  "Emoji wink": {
-    "required": ["ghost_coins", "implosions", "ottawa_treaty"],
-    "forbidden": ["picky_eater", "base_combo", "shocks"],
-    "minScore": 20200
   },
   "Santa Claus": {
     "required": ["rainbow", "superhot", "right_is_lava"],
@@ -443,11 +393,6 @@
     "required": ["addiction", "steering", "minefield"],
     "forbidden": ["nbricks", "implosions", "corner_shot"],
     "minScore": 22200
-  },
-  "skibidi toilet": {
-    "required": ["passive_income", "minefield", "bigger_explosions"],
-    "forbidden": ["shocks", "sapper", "corner_shot"],
-    "minScore": 22300
   },
   "Slovakia": {
     "required": ["respawn", "soft_reset", "clairvoyant"],
