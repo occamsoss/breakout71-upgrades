@@ -1,9 +1,4 @@
 {
-  "Abstract 6": {
-    "minScore": 10300,
-    "required": ["puck_repulse_ball", "ball_repulse_ball", "forgiving"],
-    "forbidden": ["viscosity", "unbounded", "passive_income"]
-  },
   "Hemiola": {
     "minScore": 10400,
     "required": ["limitless", "unbounded", "viscosity"],
@@ -48,11 +43,6 @@
     "minScore": 12000,
     "required": ["rainbow", "corner_shot", "bricks_attract_coins"],
     "forbidden": ["base_combo", "clairvoyant", "respawn"]
-  },
-  "Eiffel tower": {
-    "minScore": 12100,
-    "required": ["shocks", "sapper", "clairvoyant"],
-    "forbidden": ["passive_income", "picky_eater", "pierce"]
   },
   "Abstract 13": {
     "minScore": 12400,
@@ -129,11 +119,6 @@
     "forbidden": ["transparency", "etherealcoins", "three_cushion"],
     "minScore": 14300
   },
-  "utc": {
-    "required": ["ball_attracts_coins", "corner_shot", "ball_repulse_ball"],
-    "forbidden": ["puck_repulse_ball", "clairvoyant", "nbricks"],
-    "minScore": 14400
-  },
   "Enter the gungeon": {
     "required": ["shocks", "sapper", "smaller_puck"],
     "forbidden": ["pierce", "implosions", "wrap_right"],
@@ -188,11 +173,6 @@
     "required": ["wrap_left", "golden_goose", "nbricks"],
     "forbidden": ["trampoline", "sturdy_bricks", "corner_shot"],
     "minScore": 16600
-  },
-  "Peaceful Dove": {
-    "required": ["golden_goose", "wrap_right", "bricks_attract_ball"],
-    "forbidden": ["corner_shot", "wrap_left", "clairvoyant"],
-    "minScore": 16700
   },
   "Corporate dress": {
     "required": ["metamorphosis", "helium", "superhot"],
@@ -254,11 +234,6 @@
     "forbidden": ["puck_repulse_ball", "reach", "implosions"],
     "minScore": 18500
   },
-  "Potion of Addiction": {
-    "required": ["addiction", "helium", "limitless", "rainbow", "slow_down"],
-    "forbidden": [],
-    "minScore": 420
-  },
   "Eruption": {
     "required": ["implosions", "happy_family", "golden_goose"],
     "forbidden": ["bigger_explosions", "bigger_puck", "telekinesis"],
@@ -314,11 +289,6 @@
     "forbidden": [],
     "minScore": 15000
   },
-  "European Robin": {
-    "required": ["wrap_up", "smaller_puck", "happy_family"],
-    "forbidden": ["bigger_puck", "pierce"],
-    "minScore": 10000
-  },
   "67": {
     "required": ["bricks_attract_ball", "asceticism", "double_or_nothing"],
     "forbidden": ["reach", "ball_attract_ball", "chill"],
@@ -363,11 +333,6 @@
     "required": ["addiction", "steering", "minefield"],
     "forbidden": ["nbricks", "implosions", "corner_shot"],
     "minScore": 22200
-  },
-  "Slovakia": {
-    "required": ["respawn", "soft_reset", "clairvoyant"],
-    "forbidden": ["rainbow", "picky_eater", "etherealcoins"],
-    "minScore": 22500
   },
   "5 min less": {
     "required": ["picky_eater", "fountain_toss", "ghost_coins"],
