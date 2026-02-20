@@ -1,9 +1,4 @@
 {
-  "Leaf": {
-    "minScore": 9800,
-    "required": ["concave_puck", "sacrifice", "puck_repulse_ball"],
-    "forbidden": ["coin_magnet", "trampoline", "ball_repulse_ball"]
-  },
   "Abstract 6": {
     "minScore": 10300,
     "required": ["puck_repulse_ball", "ball_repulse_ball", "forgiving"],
@@ -23,11 +18,6 @@
     "minScore": 10800,
     "required": ["side_kick", "side_flip", "etherealcoins"],
     "forbidden": ["smaller_puck", "streak_shots", "trampoline"]
-  },
-  "Spain": {
-    "minScore": 10900,
-    "required": ["smaller_puck", "passive_income", "compound_interest"],
-    "forbidden": ["fountain_toss", "side_kick", "side_flip"]
   },
   "Uzbekistan": {
     "minScore": 11000,
@@ -124,11 +114,6 @@
     "forbidden": ["helium", "pierce", "etherealcoins"],
     "minScore": 13900
   },
-  "Egg pan": {
-    "required": ["hot_start", "streak_shots", "implosions"],
-    "forbidden": ["concave_puck", "bricks_attract_coins", "base_combo"],
-    "minScore": 14000
-  },
   "Inception": {
     "required": ["hot_start", "wrap_left", "smaller_puck"],
     "forbidden": ["streak_shots", "superhot", "bricks_attract_coins"],
@@ -163,11 +148,6 @@
     "required": ["limitless", "unbounded", "viscosity"],
     "forbidden": ["passive_income", "right_is_lava", "forgiving"],
     "minScore": 15200
-  },
-  "Brigador": {
-    "required": ["puck_repulse_ball", "respawn", "soft_reset"],
-    "forbidden": ["ball_repulse_ball", "skip_last", "unbounded"],
-    "minScore": 15300
   },
   "Piñata": {
     "required": ["bricks_attract_ball", "wrap_right", "corner_shot"],
@@ -229,11 +209,6 @@
     "forbidden": ["sturdy_bricks", "passive_income", "wrap_up"],
     "minScore": 17000
   },
-  "Toadshield": {
-    "required": ["trickledown", "sacrifice", "metamorphosis"],
-    "forbidden": ["minefield", "happy_family", "addiction"],
-    "minScore": 17200
-  },
   "Tree": {
     "required": ["asceticism", "three_cushion", "trickledown"],
     "forbidden": ["soft_reset", "compound_interest", "metamorphosis"],
@@ -263,11 +238,6 @@
     "required": ["fountain_toss", "trickledown", "golden_goose"],
     "forbidden": ["telekinesis", "reach", "coin_magnet"],
     "minScore": 18000
-  },
-  "Bad tooth": {
-    "required": ["shocks", "ball_attract_ball", "respawn"],
-    "forbidden": ["bigger_puck", "ball_repulse_ball", "ottawa_treaty"],
-    "minScore": 18100
   },
   "Cloud sun and birds": {
     "required": ["rainbow", "ghost_coins", "trampoline"],
@@ -403,11 +373,6 @@
     "required": ["picky_eater", "fountain_toss", "ghost_coins"],
     "forbidden": ["clairvoyant", "passive_income", "corner_shot"],
     "minScore": 22600
-  },
-  "Weezevent": {
-    "required": ["base_combo", "ghost_coins", "compound_interest"],
-    "forbidden": ["nbricks", "forgiving", "picky_eater"],
-    "minScore": 22700
   },
   "Dots 2": {
     "required": ["viscosity", "concave_puck", "pierce"],
