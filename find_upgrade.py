@@ -3,21 +3,79 @@ import itertools
 import re
 import sys
 
-# -----------------------------
-# Loading & parsing helpers
-# -----------------------------
+TOP_K = 5
+
+def paginate_options(options, render_fn):
+    i = 0
+    n = len(options)
+
+    while i < n:
+        chunk = options[i:i+TOP_K]
+
+        for opt in chunk:
+            render_fn(opt)
+
+        i += TOP_K
+
+        if i >= n:
+            break
+
+        ans = input(
+            "\nType 'more' to see additional options or press Enter to continue: "
+        ).strip().lower()
+
+        if ans != "more":
+            break
+
+def render_unlock_option(opt, code_to_real):
+    combo, unlocked, missing = opt
+
+    print("Recommended upgrades:")
+    for u in combo:
+        print("  -", code_to_real[u])
+
+    print("\nUnlocks:", len(unlocked))
+    for l in unlocked:
+        print("  ✔", l)
+
+    counts = off_by_counts(missing)
+    if counts:
+        print()
+        for k in sorted(counts):
+            print(f"Off-by-{k}: {counts[k]}")
+
+    print("-" * 40)
+
+def render_almost_option(opt, code_to_real):
+    combo, missing, counts, off1 = opt
+
+    print("Recommended upgrades:")
+    for u in combo:
+        print("  -", code_to_real[u])
+
+    print(f"\nOff-by-1: {off1}")
+
+    for k in sorted(counts):
+        if k != 1:
+            print(f"Off-by-{k}: {counts[k]}")
+
+    print("-" * 40)
+
+# -------------------------------------------------
+# Load files
+# -------------------------------------------------
 
 def load_unlock_conditions():
     with open("unlockConditions.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def load_upgrade_name_mappings():
+def load_upgrade_data():
     """
-    Builds two mappings:
-      real_name (lowercase) -> code_name
-      code_name -> real_name
-    using upgrades.ts + en.json
+    Returns:
+      real_to_code
+      code_to_real
+      code_to_category
     """
     with open("en.json", "r", encoding="utf-8") as f:
         en = json.load(f)
@@ -26,214 +84,219 @@ def load_upgrade_name_mappings():
         ts = f.read()
 
     pattern = re.compile(
-        r'id:\s*"([^"]+)"[\s\S]*?name:\s*t\("([^"]+)"\)',
+        r'category:\s*categories\.(\w+)[\s\S]*?id:\s*"([^"]+)"[\s\S]*?name:\s*t\("([^"]+)"\)',
         re.MULTILINE,
     )
 
     real_to_code = {}
     code_to_real = {}
+    code_to_category = {}
 
-    for code_id, translation_key in pattern.findall(ts):
-        real_name = en.get(translation_key)
+    for category, code_id, tkey in pattern.findall(ts):
+        real_name = en.get(tkey)
         if real_name:
             real_to_code[real_name.lower()] = code_id
             code_to_real[code_id] = real_name
+            code_to_category[code_id] = category
 
-    return real_to_code, code_to_real
-
-
-# -----------------------------
-# Normalization
-# -----------------------------
-
-def normalize_real_names(names, real_to_code):
-    result = set()
-    for name in names:
-        key = name.strip().lower()
-        if not key:
-            continue
-        if key not in real_to_code:
-            print(f"⚠️  Unknown upgrade: '{name.strip()}'")
-            continue
-        result.add(real_to_code[key])
-    return result
+    return real_to_code, code_to_real, code_to_category
 
 
-def pretty_upgrades(code_names, code_to_real):
-    return [code_to_real.get(c, c) for c in code_names]
-
-
-# -----------------------------
-# Evaluation logic
-# -----------------------------
-
-def evaluate_combo(combo, already_chosen, levels):
-    full_set = already_chosen | set(combo)
-    unlocked = []
-    almost = []
-
-    for level_name, data in levels.items():
-        required = set(data.get("required", []))
-        forbidden = set(data.get("forbidden", []))
-
-        if full_set & forbidden:
-            continue
-
-        missing = required - full_set
-        if not missing:
-            unlocked.append(level_name)
-        else:
-            almost.append((level_name, len(missing), missing))
-
-    almost.sort(key=lambda x: x[1])
-    return unlocked, almost
-
-
-def recommend_upgrades(chosen, available, max_picks, levels):
-    best_unlocks = -1
-    best_almost_score = float("inf")
-    best_combo_size = float("inf")
-    best_results = []
-
-    for r in range(1, max_picks + 1):
-        for combo in itertools.combinations(available, r):
-            unlocked, almost = evaluate_combo(combo, chosen, levels)
-
-            unlock_count = len(unlocked)
-            closest_missing = almost[0][1] if almost else float("inf")
-
-            is_better = False
-
-            if unlock_count > best_unlocks:
-                is_better = True
-            elif unlock_count == best_unlocks:
-                if unlock_count > 0:
-                    # Prefer fewer upgrades if same unlock count
-                    if r < best_combo_size:
-                        is_better = True
-                else:
-                    # No immediate unlocks → closer to unlocking
-                    if closest_missing < best_almost_score:
-                        is_better = True
-                    elif closest_missing == best_almost_score and r < best_combo_size:
-                        is_better = True
-
-            if is_better:
-                best_unlocks = unlock_count
-                best_almost_score = closest_missing
-                best_combo_size = r
-                best_results = [(combo, unlocked, almost)]
-            elif (
-                unlock_count == best_unlocks
-                and closest_missing == best_almost_score
-                and r == best_combo_size
-            ):
-                best_results.append((combo, unlocked, almost))
-
-    return best_results
+# -------------------------------------------------
+# Input validation
+# -------------------------------------------------
 
 def prompt_for_upgrades(prompt, real_to_code):
-    """
-    Prompts until all entered upgrade names are valid.
-    Returns a set of code names.
-    """
     while True:
         raw = input(prompt).strip()
         if not raw:
             return set()
 
         names = [n.strip() for n in raw.split(",") if n.strip()]
-        unknown = [
-            n for n in names
-            if n.lower() not in real_to_code
-        ]
+        unknown = [n for n in names if n.lower() not in real_to_code]
 
         if unknown:
-            print(
-                f"❌ Unknown upgrade(s): {', '.join(unknown)}"
-            )
+            print(f"❌ Unknown upgrade(s): {', '.join(unknown)}")
             print("Please re-enter the full list.\n")
             continue
 
         return {real_to_code[n.lower()] for n in names}
 
 
+# -------------------------------------------------
+# Evaluation helpers
+# -------------------------------------------------
+
+def evaluate_levels(combo, chosen, levels):
+    full = chosen | set(combo)
+
+    unlocked = []
+    missing_map = {}
+
+    for lvl, data in levels.items():
+        req = set(data.get("required", []))
+        forb = set(data.get("forbidden", []))
+
+        if full & forb:
+            continue
+
+        missing = req - full
+        if not missing:
+            unlocked.append(lvl)
+        else:
+            missing_map[lvl] = missing
+
+    return unlocked, missing_map
 
 
-# -----------------------------
+def off_by_counts(missing_map):
+    counts = {}
+    for m in missing_map.values():
+        n = len(m)
+        counts[n] = counts.get(n, 0) + 1
+    return counts
+
+
+# -------------------------------------------------
+# Recommendation engine (new rules)
+# -------------------------------------------------
+
+def recommend(chosen, available, max_picks, levels, code_to_category):
+    best_unlock = 0
+    best_unlock_sets = []
+
+    # -------- pass 1: immediate unlocks --------
+    for r in range(1, max_picks + 1):
+        for combo in itertools.combinations(available, r):
+            unlocked, missing = evaluate_levels(combo, chosen, levels)
+
+            if len(unlocked) > best_unlock:
+                best_unlock = len(unlocked)
+                best_unlock_sets = [(combo, unlocked, missing)]
+            elif len(unlocked) == best_unlock and best_unlock > 0:
+                best_unlock_sets.append((combo, unlocked, missing))
+
+    # ---------- sort unlock combos by off-by-one ----------
+    if best_unlock > 0:
+        ranked = []
+
+        for combo, unlocked, missing in best_unlock_sets:
+            off1 = sum(1 for m in missing.values() if len(m) == 1)
+            ranked.append((combo, unlocked, missing, off1))
+
+        ranked.sort(key=lambda x: x[3], reverse=True)
+
+        # strip ranking value for return
+        sorted_sets = [(c, u, m) for c, u, m, _ in ranked]
+        return "unlock", sorted_sets
+
+    # -------- pass 2: off-by-one non-combo only --------
+    candidates = []
+
+    for r in range(1, max_picks + 1):
+        for combo in itertools.combinations(available, r):
+            unlocked, missing = evaluate_levels(combo, chosen, levels)
+
+            off1 = []
+            for lvl, miss in missing.items():
+                if len(miss) == 1:
+                    u = next(iter(miss))
+                    if code_to_category.get(u) != "combo":
+                        off1.append(lvl)
+
+            if off1:
+                counts = off_by_counts(missing)
+                candidates.append((combo, missing, counts, len(off1)))
+
+    candidates.sort(key=lambda x: x[3], reverse=True)
+    return "almost", candidates
+
+
+# -------------------------------------------------
+# Detail display
+# -------------------------------------------------
+
+def show_details(combo, missing, code_to_real, code_to_category):
+    print("\n=== LEVEL DETAILS ===\n")
+
+    for lvl, miss in missing.items():
+        names = []
+        for u in miss:
+            name = code_to_real.get(u, u)
+            if code_to_category.get(u) != "combo":
+                name = f"*{name}*"  # highlight non-combo
+            names.append(name)
+
+        print(f"{lvl}: missing {', '.join(names)}")
+
+    print("\n(* non-combo upgrades)\n")
+
+
+# -------------------------------------------------
 # Main loop
-# -----------------------------
+# -------------------------------------------------
 
 def main():
     try:
         levels = load_unlock_conditions()
-        real_to_code, code_to_real = load_upgrade_name_mappings()
+        real_to_code, code_to_real, code_to_category = load_upgrade_data()
     except FileNotFoundError as e:
-        print(f"Missing required file: {e.filename}")
+        print(f"Missing file: {e.filename}")
         sys.exit(1)
 
-    level_number = 1
-    chosen_upgrades = set()
+    chosen = set()
+    level_num = 1
 
     print("\n=== Upgrade Optimizer ===")
-    print("Press Ctrl+C to quit.\n")
+    print("Press Ctrl+C to exit.\n")
 
     while True:
-        print(f"\n=== GAME LEVEL {level_number} ===")
+        print(f"\n=== GAME LEVEL {level_num} ===")
 
-        if level_number == 1:
-            chosen_upgrades |= prompt_for_upgrades(
-                "Current upgrades: ", real_to_code
-            )
+        if level_num == 1:
+            chosen |= prompt_for_upgrades("Current upgrades: ", real_to_code)
 
-        available_upgrades = prompt_for_upgrades(
-            "Available upgrades: ", real_to_code
-        )
+        available = prompt_for_upgrades("Available upgrades: ", real_to_code)
 
+        while True:
+            try:
+                max_picks = int(input("How many upgrades can you choose? "))
+                break
+            except:
+                print("Invalid number.")
 
-
-        try:
-            pick_count = int(
-                input("How many upgrades can you choose? ").strip()
-            )
-        except ValueError:
-            print("Invalid number.")
-            continue
-
-        results = recommend_upgrades(
-            chosen_upgrades, available_upgrades, pick_count, levels
+        mode, results = recommend(
+            chosen, available, max_picks, levels, code_to_category
         )
 
         print("\n=== RECOMMENDATIONS ===\n")
 
-        for combo, unlocked, almost in results:
-            print("Recommended upgrades:")
-            for name in pretty_upgrades(combo, code_to_real):
-                print(f"  - {name}")
+        # ---------- immediate unlock mode ----------
+        if mode == "unlock":
+            paginate_options(
+                results,
+                lambda opt: render_unlock_option(opt, code_to_real)
+            )
 
-            if unlocked:
-                print("\nUnlocked now:")
-                for lvl in unlocked:
-                    print(f"  ✔ {lvl}")
-            else:
-                print("\nUnlocked now: None")
+        # ---------- off-by-one mode ----------
+        else:
+            paginate_options(
+                results,
+                lambda opt: render_almost_option(opt, code_to_real)
+            )
 
-            if almost:
-                print("\nAlmost unlocked:")
-                for lvl, _, missing in almost[:10]:
-                    missing_pretty = pretty_upgrades(missing, code_to_real)
-                    print(
-                        f"  • {lvl} (missing: {', '.join(missing_pretty)})"
-                    )
+            ans = input(
+                "\nType 'details' to see level requirements or press Enter to continue: "
+            ).strip().lower()
 
-            print("-" * 50)
+            if ans == "details":
+                for combo, missing, counts, off1 in results:
+                    print("\nFor combo:", ", ".join(code_to_real[u] for u in combo))
+                    show_details(combo, missing, code_to_real, code_to_category)
 
-        chosen_upgrades |= prompt_for_upgrades(
-            "\nWhich upgrades did you choose? ", real_to_code
-        )
+        chosen |= prompt_for_upgrades("\nWhich upgrades did you choose? ", real_to_code)
 
-
-        level_number += 1
+        level_num += 1
 
 
 if __name__ == "__main__":
