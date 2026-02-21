@@ -79,11 +79,6 @@
     "forbidden": ["nbricks", "corner_shot", "smaller_puck"],
     "minScore": 13300
   },
-  "Spider": {
-    "required": ["transparency", "ghost_coins", "left_is_lava"],
-    "forbidden": ["pierce_color", "reach", "sticky_coins"],
-    "minScore": 13500
-  },
   "Gliders": {
     "required": ["trampoline", "superhot", "bricks_attract_ball"],
     "forbidden": ["reach", "rainbow", "ghost_coins"],
