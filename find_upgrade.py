@@ -264,7 +264,13 @@ def recommend(chosen, available, max_picks, levels, code_to_category):
 def show_details(combo, missing, code_to_real, code_to_category):
     print("\n=== LEVEL DETAILS ===\n")
 
-    for lvl, miss in missing.items():
+    # sort levels by number of missing upgrades
+    sorted_levels = sorted(
+        missing.items(),
+        key=lambda item: len(item[1])
+    )
+
+    for lvl, miss in sorted_levels:
         names = []
         for u in miss:
             name = code_to_real.get(u, u)
