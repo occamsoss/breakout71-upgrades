@@ -190,71 +190,108 @@ def print_off_by_totals(counts):
 # -------------------------------------------------
 
 def recommend(chosen, available, max_picks, levels, code_to_category):
-    best_unlock = 0
-    best_unlock_sets = []
+    """
+    Returns:
+      mode = "unlock" or "almost"
+      results = list of tuples compatible with existing renderers
 
-    # -------- pass 1: immediate unlocks --------
+    Rules implemented:
+      1. Immediate unlocks first
+      2. If none → off-1 non-combo
+      3. If none → maximize off-2, off-3...
+      4. Non-combo only in almost mode
+      5. If combo doesn't change totals → show baseline totals
+      6. Always return recommendations if any non-combo available
+    """
+
+    # -------------------------------------------------
+    # Baseline totals (no new upgrades)
+    # -------------------------------------------------
+    _, baseline_missing = evaluate_levels((), chosen, levels)
+    baseline_counts = off_by_counts(baseline_missing)
+
+    # -------------------------------------------------
+    # PASS 1 — IMMEDIATE UNLOCKS (combo allowed)
+    # -------------------------------------------------
+    best_unlock = 0
+    unlock_sets = []
+
     for r in range(1, max_picks + 1):
         for combo in itertools.combinations(available, r):
             unlocked, missing = evaluate_levels(combo, chosen, levels)
 
-            if len(unlocked) > best_unlock:
-                best_unlock = len(unlocked)
-                best_unlock_sets = [(combo, unlocked, missing)]
-            elif len(unlocked) == best_unlock and best_unlock > 0:
-                best_unlock_sets.append((combo, unlocked, missing))
+            ucount = len(unlocked)
+
+            if ucount > best_unlock:
+                best_unlock = ucount
+                unlock_sets = [(combo, unlocked, missing)]
+            elif ucount == best_unlock and ucount > 0:
+                unlock_sets.append((combo, unlocked, missing))
 
     if best_unlock > 0:
         ranked = []
-        for combo, unlocked, missing in best_unlock_sets:
+        for combo, unlocked, missing in unlock_sets:
             off1 = sum(1 for m in missing.values() if len(m) == 1)
             ranked.append((combo, unlocked, missing, off1))
 
         ranked.sort(key=lambda x: x[3], reverse=True)
+
+        # renderer expects (combo, unlocked, missing)
         return "unlock", [(c, u, m) for c, u, m, _ in ranked]
 
-    # -------- pass 2: non-combo candidates --------
+    # -------------------------------------------------
+    # PASS 2 — ALMOST MODE (NON-COMBO ONLY)
+    # -------------------------------------------------
     candidates = []
 
     for r in range(1, max_picks + 1):
         for combo in itertools.combinations(available, r):
 
-            # only non-combo upgrades
+            # non-combo restriction
             if any(code_to_category.get(u) == "combo" for u in combo):
                 continue
 
             unlocked, missing = evaluate_levels(combo, chosen, levels)
             counts = off_by_counts(missing)
 
+            # preserve baseline if unchanged or empty
+            if not counts or counts == baseline_counts:
+                counts = baseline_counts
+
             candidates.append((combo, missing, counts))
 
     if not candidates:
         return "almost", []
 
-    # -------- check if any off-by-1 exists --------
+    # -------------------------------------------------
+    # CHECK OFF-1 EXISTENCE
+    # -------------------------------------------------
     max_off1 = max(c[2].get(1, 0) for c in candidates)
 
     if max_off1 > 0:
-        # original behavior
-        filtered = [
+        ranked = [
             (combo, missing, counts, counts.get(1, 0))
             for combo, missing, counts in candidates
         ]
-        filtered.sort(key=lambda x: x[3], reverse=True)
-        return "almost", filtered
 
-    # -------- NEW: fallback to off-by-2,3,... ranking --------
+        ranked.sort(key=lambda x: x[3], reverse=True)
+        return "almost", ranked
+
+    # -------------------------------------------------
+    # FALLBACK — MAXIMIZE OFF-2, OFF-3, ...
+    # -------------------------------------------------
     def rank_tuple(counts):
-        # build descending tuple (off2, off3, off4...)
+        if not counts:
+            return (0,)
         max_k = max(counts.keys())
         return tuple(counts.get(k, 0) for k in range(2, max_k + 1))
 
-    ranked = []
-    for combo, missing, counts in candidates:
-        ranked.append((combo, missing, counts, rank_tuple(counts)))
+    ranked = [
+        (combo, missing, counts, rank_tuple(counts))
+        for combo, missing, counts in candidates
+    ]
 
     ranked.sort(key=lambda x: x[3], reverse=True)
-
     return "almost", ranked
 
 # -------------------------------------------------
