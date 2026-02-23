@@ -1,33 +1,8 @@
 {
-  "Hemiola": {
-    "minScore": 10400,
-    "required": ["limitless", "unbounded", "viscosity"],
-    "forbidden": ["right_is_lava", "forgiving", "sturdy_bricks"]
-  },
-  "Obigre": {
-    "minScore": 10500,
-    "required": ["sapper", "shocks", "soft_reset"],
-    "forbidden": ["bigger_explosions", "pierce", "skip_last"]
-  },
-  "Lebanon": {
-    "minScore": 10800,
-    "required": ["side_kick", "side_flip", "etherealcoins"],
-    "forbidden": ["smaller_puck", "streak_shots", "trampoline"]
-  },
-  "Uzbekistan": {
-    "minScore": 11000,
-    "required": ["picky_eater", "ghost_coins", "bigger_explosions"],
-    "forbidden": ["base_combo", "clairvoyant", "implosions"]
-  },
   "Pakistan": {
     "minScore": 11100,
     "required": ["nbricks", "ghost_coins", "trampoline"],
     "forbidden": ["picky_eater", "clairvoyant", "corner_shot"]
-  },
-  "Türkiye": {
-    "minScore": 11400,
-    "required": ["compound_interest", "fountain_toss", "concave_puck"],
-    "forbidden": ["bigger_explosions", "superhot", "respawn"]
   },
   "Abstract 9": {
     "minScore": 11700,
@@ -53,11 +28,6 @@
     "minScore": 12500,
     "required": ["smaller_puck", "asceticism", "rainbow"],
     "forbidden": ["bricks_attract_ball", "soft_reset", "respawn"]
-  },
-  "Mario!": {
-    "minScore": 12800,
-    "required": ["unbounded", "limitless", "viscosity"],
-    "forbidden": ["forgiving", "skip_last", "ball_attract_ball"]
   },
   "Minesweeper": {
     "minScore": 12900,
@@ -109,11 +79,6 @@
     "forbidden": ["shocks", "metamorphosis", "pierce"],
     "minScore": 14200
   },
-  "italy": {
-    "required": ["sticky_coins", "pierce_color", "left_is_lava"],
-    "forbidden": ["transparency", "etherealcoins", "three_cushion"],
-    "minScore": 14300
-  },
   "Enter the gungeon": {
     "required": ["shocks", "sapper", "smaller_puck"],
     "forbidden": ["pierce", "implosions", "wrap_right"],
@@ -123,11 +88,6 @@
     "required": ["ottawa_treaty", "superhot", "forgiving"],
     "forbidden": ["sticky_coins", "pierce_color", "viscosity"],
     "minScore": 15100
-  },
-  "Factorio": {
-    "required": ["limitless", "unbounded", "viscosity"],
-    "forbidden": ["passive_income", "right_is_lava", "forgiving"],
-    "minScore": 15200
   },
   "Piñata": {
     "required": ["bricks_attract_ball", "wrap_right", "corner_shot"],
@@ -158,11 +118,6 @@
     "required": ["fountain_toss", "happy_family", "puck_repulse_ball"],
     "forbidden": ["ball_repulse_ball", "trickledown", "hot_start"],
     "minScore": 16200
-  },
-  "Profit motive": {
-    "required": ["ottawa_treaty", "hot_start", "compound_interest"],
-    "forbidden": ["respawn", "rainbow", "bigger_explosions"],
-    "minScore": 16400
   },
   "Last leaf": {
     "required": ["wrap_left", "golden_goose", "nbricks"],
@@ -223,11 +178,6 @@
     "required": ["respawn", "superhot", "sturdy_bricks"],
     "forbidden": ["multiball", "pierce", "pierce_color"],
     "minScore": 19877
-  },
-  "Pumpkin": {
-    "required": ["trickledown", "ball_repulse_ball", "chill"],
-    "forbidden": ["puck_repulse_ball", "reach", "implosions"],
-    "minScore": 18500
   },
   "Eruption": {
     "required": ["implosions", "happy_family", "golden_goose"],
