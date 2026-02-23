@@ -27,6 +27,29 @@ def paginate_options(options, render_fn):
         if ans != "more":
             break
 
+def paginate_details(results, code_to_real, code_to_category):
+    i = 0
+    n = len(results)
+
+    while i < n:
+        chunk = results[i:i+TOP_K]
+
+        for combo, missing, *_ in chunk:
+            print("\nFor combo:", ", ".join(code_to_real[u] for u in combo))
+            show_details(combo, missing, code_to_real, code_to_category)
+
+        i += TOP_K
+
+        if i >= n:
+            break
+
+        ans = input(
+            "\nType 'more' to see 5 more or press Enter to continue: "
+        ).strip().lower()
+
+        if ans != "more":
+            break
+
 def render_unlock_option(opt, code_to_real):
     combo, unlocked, missing = opt
 
@@ -165,7 +188,7 @@ def recommend(chosen, available, max_picks, levels, code_to_category):
     best_unlock = 0
     best_unlock_sets = []
 
-    # -------- pass 1: immediate unlocks --------
+    # -------- pass 1: immediate unlocks (combo allowed) --------
     for r in range(1, max_picks + 1):
         for combo in itertools.combinations(available, r):
             unlocked, missing = evaluate_levels(combo, chosen, levels)
@@ -176,25 +199,27 @@ def recommend(chosen, available, max_picks, levels, code_to_category):
             elif len(unlocked) == best_unlock and best_unlock > 0:
                 best_unlock_sets.append((combo, unlocked, missing))
 
-    # ---------- sort unlock combos by off-by-one ----------
+    # ---------- unlock mode ----------
     if best_unlock > 0:
         ranked = []
-
         for combo, unlocked, missing in best_unlock_sets:
             off1 = sum(1 for m in missing.values() if len(m) == 1)
             ranked.append((combo, unlocked, missing, off1))
 
         ranked.sort(key=lambda x: x[3], reverse=True)
-
-        # strip ranking value for return
         sorted_sets = [(c, u, m) for c, u, m, _ in ranked]
         return "unlock", sorted_sets
 
-    # -------- pass 2: off-by-one non-combo only --------
+    # -------- pass 2: almost mode (NON-COMBO ONLY) --------
     candidates = []
 
     for r in range(1, max_picks + 1):
         for combo in itertools.combinations(available, r):
+
+            # 🚫 skip if combo upgrade present
+            if any(code_to_category.get(u) == "combo" for u in combo):
+                continue
+
             unlocked, missing = evaluate_levels(combo, chosen, levels)
 
             off1 = []
@@ -210,7 +235,6 @@ def recommend(chosen, available, max_picks, levels, code_to_category):
 
     candidates.sort(key=lambda x: x[3], reverse=True)
     return "almost", candidates
-
 
 # -------------------------------------------------
 # Detail display
@@ -290,9 +314,7 @@ def main():
             ).strip().lower()
 
             if ans == "details":
-                for combo, missing, counts, off1 in results:
-                    print("\nFor combo:", ", ".join(code_to_real[u] for u in combo))
-                    show_details(combo, missing, code_to_real, code_to_category)
+                paginate_details(results, code_to_real, code_to_category)
 
         chosen |= prompt_for_upgrades("\nWhich upgrades did you choose? ", real_to_code)
 
