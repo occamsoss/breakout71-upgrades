@@ -9,11 +9,6 @@
     "required": ["transparency", "ball_attract_ball", "left_is_lava"],
     "forbidden": ["pierce_color", "rainbow", "passive_income"]
   },
-  "Face": {
-    "minScore": 12000,
-    "required": ["rainbow", "corner_shot", "bricks_attract_coins"],
-    "forbidden": ["base_combo", "clairvoyant", "respawn"]
-  },
   "Abstract 13": {
     "minScore": 12400,
     "required": ["ball_attract_ball", "streak_shots", "ghost_coins"],
@@ -148,11 +143,6 @@
     "required": ["forgiving", "golden_goose", "viscosity"],
     "forbidden": ["implosions", "limitless", "fountain_toss"],
     "minScore": 17500
-  },
-  "apple": {
-    "required": ["bricks_attract_ball", "bricks_attract_coins", "superhot"],
-    "forbidden": ["right_is_lava", "sturdy_bricks", "skip_last"],
-    "minScore": 17800
   },
   "Crosshair 2": {
     "required": ["sapper", "ottawa_treaty", "bigger_explosions"],
