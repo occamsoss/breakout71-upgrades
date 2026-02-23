@@ -4,11 +4,6 @@
     "required": ["nbricks", "ghost_coins", "trampoline"],
     "forbidden": ["picky_eater", "clairvoyant", "corner_shot"]
   },
-  "Abstract 9": {
-    "minScore": 11700,
-    "required": ["implosions", "smaller_puck", "right_is_lava"],
-    "forbidden": ["base_combo", "sturdy_bricks", "hot_start"]
-  },
   "Abstract 10": {
     "minScore": 11900,
     "required": ["transparency", "ball_attract_ball", "left_is_lava"],
@@ -238,11 +233,6 @@
     "required": ["bricks_attract_ball", "asceticism", "double_or_nothing"],
     "forbidden": ["reach", "ball_attract_ball", "chill"],
     "minScore": 6767
-  },
-  "Rainbow": {
-    "required": ["corner_shot", "reach", "chill"],
-    "forbidden": ["three_cushion", "happy_family", "clairvoyant"],
-    "minScore": 21100
   },
   "Couple": {
     "required": ["multiball", "ball_attract_ball", "happy_family"],
