@@ -54,16 +54,6 @@
     "forbidden": ["happy_family", "metamorphosis", "hot_start"],
     "minScore": 13800
   },
-  "Taijitu": {
-    "required": ["hot_start", "puck_repulse_ball", "ball_repulse_ball"],
-    "forbidden": ["helium", "pierce", "etherealcoins"],
-    "minScore": 13900
-  },
-  "Inception": {
-    "required": ["hot_start", "wrap_left", "smaller_puck"],
-    "forbidden": ["streak_shots", "superhot", "bricks_attract_coins"],
-    "minScore": 14100
-  },
   "Chess": {
     "required": ["respawn", "wrap_left", "sapper"],
     "forbidden": ["shocks", "metamorphosis", "pierce"],
@@ -79,11 +69,6 @@
     "forbidden": ["sticky_coins", "pierce_color", "viscosity"],
     "minScore": 15100
   },
-  "Piñata": {
-    "required": ["bricks_attract_ball", "wrap_right", "corner_shot"],
-    "forbidden": ["clairvoyant", "fountain_toss", "picky_eater"],
-    "minScore": 15700
-  },
   "Zen monk": {
     "required": ["respawn", "rainbow", "golden_goose"],
     "forbidden": ["clairvoyant", "extra_life", "picky_eater"],
@@ -98,11 +83,6 @@
     "required": ["bigger_explosions", "trickledown", "transparency"],
     "forbidden": ["left_is_lava", "pierce_color", "sticky_coins"],
     "minScore": 16000
-  },
-  "GNU": {
-    "required": ["extra_life", "superhot", "trickledown"],
-    "forbidden": ["etherealcoins", "transparency", "left_is_lava"],
-    "minScore": 16100
   },
   "Pipe": {
     "required": ["fountain_toss", "happy_family", "puck_repulse_ball"],
@@ -183,11 +163,6 @@
     "required": ["wrap_right", "wrap_up", "nbricks"],
     "forbidden": ["three_cushion", "shocks", "sapper"],
     "minScore": 19400
-  },
-  "Mountain Climber": {
-    "required": ["happy_family", "wrap_left", "extra_life"],
-    "forbidden": ["fountain_toss", "bricks_attract_coins", "passive_income"],
-    "minScore": 19500
   },
   "Japan": {
     "required": ["addiction", "minefield", "trampoline"],
