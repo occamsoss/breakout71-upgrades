@@ -1,9 +1,4 @@
 {
-  "Pakistan": {
-    "minScore": 11100,
-    "required": ["nbricks", "ghost_coins", "trampoline"],
-    "forbidden": ["picky_eater", "clairvoyant", "corner_shot"]
-  },
   "Abstract 10": {
     "minScore": 11900,
     "required": ["transparency", "ball_attract_ball", "left_is_lava"],
@@ -19,20 +14,10 @@
     "required": ["smaller_puck", "asceticism", "rainbow"],
     "forbidden": ["bricks_attract_ball", "soft_reset", "respawn"]
   },
-  "Minesweeper": {
-    "minScore": 12900,
-    "required": ["ottawa_treaty", "skip_last", "unbounded"],
-    "forbidden": ["limitless", "viscosity", "forgiving"]
-  },
   "The Boys": {
     "minScore": 13100,
     "required": ["concave_puck", "respawn", "rainbow"],
     "forbidden": ["reach", "corner_shot", "skip_last"]
-  },
-  "A Very Dangerous High-Five": {
-    "minScore": 13200,
-    "required": ["side_kick", "rainbow", "corner_shot"],
-    "forbidden": ["streak_shots", "reach", "clairvoyant"]
   },
   "Blinky": {
     "required": ["clairvoyant", "reach", "double_or_nothing"],
@@ -99,11 +84,6 @@
     "forbidden": ["corner_shot", "passive_income", "pierce"],
     "minScore": 16800
   },
-  "Zombie": {
-    "required": ["corner_shot", "respawn", "addiction"],
-    "forbidden": ["minefield", "clairvoyant", "etherealcoins"],
-    "minScore": 16900
-  },
   "Dead Meme": {
     "required": ["wrap_right", "minefield", "addiction"],
     "forbidden": ["sturdy_bricks", "passive_income", "wrap_up"],
@@ -158,11 +138,6 @@
     "required": ["hot_start", "metamorphosis", "superhot"],
     "forbidden": ["transparency", "left_is_lava", "pierce_color"],
     "minScore": 19300
-  },
-  "christmas tree": {
-    "required": ["wrap_right", "wrap_up", "nbricks"],
-    "forbidden": ["three_cushion", "shocks", "sapper"],
-    "minScore": 19400
   },
   "Japan": {
     "required": ["addiction", "minefield", "trampoline"],
@@ -277,11 +252,6 @@
   "Easter bell": {
     "required": ["ball_attracts_coins", "bigger_explosions", "bigger_puck"],
     "forbidden": ["hot_start", "pierce", "limitless"],
-    "minScore": 12000
-  },
-  "Anti-Gravity Lean": {
-    "required": ["viscosity", "hot_start", "double_or_nothing"],
-    "forbidden": ["forgiving", "limitless"],
     "minScore": 12000
   },
   "Construction site": {
