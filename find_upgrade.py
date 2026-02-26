@@ -366,6 +366,13 @@ def main():
                 lambda opt: render_unlock_option(opt, code_to_real)
             )
 
+            ans = input(
+                "\nType 'details' to see level requirements or press Enter to continue: "
+            ).strip().lower()
+
+            if ans == "details":
+                paginate_details(results, code_to_real, code_to_category)
+
         # ---------- off-by-one mode ----------
         else:
             paginate_options(
