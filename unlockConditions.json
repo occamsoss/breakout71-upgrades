@@ -14,11 +14,6 @@
     "required": ["smaller_puck", "asceticism", "rainbow"],
     "forbidden": ["bricks_attract_ball", "soft_reset", "respawn"]
   },
-  "The Boys": {
-    "minScore": 13100,
-    "required": ["concave_puck", "respawn", "rainbow"],
-    "forbidden": ["reach", "corner_shot", "skip_last"]
-  },
   "Blinky": {
     "required": ["clairvoyant", "reach", "double_or_nothing"],
     "forbidden": ["nbricks", "corner_shot", "smaller_puck"],
@@ -39,11 +34,6 @@
     "forbidden": ["happy_family", "metamorphosis", "hot_start"],
     "minScore": 13800
   },
-  "Chess": {
-    "required": ["respawn", "wrap_left", "sapper"],
-    "forbidden": ["shocks", "metamorphosis", "pierce"],
-    "minScore": 14200
-  },
   "Enter the gungeon": {
     "required": ["shocks", "sapper", "smaller_puck"],
     "forbidden": ["pierce", "implosions", "wrap_right"],
@@ -54,20 +44,10 @@
     "forbidden": ["sticky_coins", "pierce_color", "viscosity"],
     "minScore": 15100
   },
-  "Zen monk": {
-    "required": ["respawn", "rainbow", "golden_goose"],
-    "forbidden": ["clairvoyant", "extra_life", "picky_eater"],
-    "minScore": 15800
-  },
   "Lotus flower": {
     "required": ["picky_eater", "bricks_attract_coins", "ghost_coins"],
     "forbidden": ["clairvoyant", "golden_goose", "compound_interest"],
     "minScore": 15900
-  },
-  "Rainbow Spiral": {
-    "required": ["bigger_explosions", "trickledown", "transparency"],
-    "forbidden": ["left_is_lava", "pierce_color", "sticky_coins"],
-    "minScore": 16000
   },
   "Pipe": {
     "required": ["fountain_toss", "happy_family", "puck_repulse_ball"],
@@ -194,11 +174,6 @@
     "forbidden": ["clairvoyant"],
     "minScore": 12345
   },
-  "f-droid": {
-    "required": ["happy_family", "respawn", "wrap_left"],
-    "forbidden": ["asceticism", "right_is_lava", "bricks_attract_ball"],
-    "minScore": 22000
-  },
   "Mini fdroid": {
     "required": ["trampoline", "ball_repulse_ball", "sturdy_bricks"],
     "forbidden": ["puck_repulse_ball", "bricks_attract_ball", "addiction"],
@@ -233,11 +208,6 @@
     "required": ["bricks_attract_ball", "skip_last", "trampoline"],
     "forbidden": ["shocks", "sapper", "respawn"],
     "minScore": 23100
-  },
-  "Chocolate chip cookie": {
-    "required": ["steering", "golden_goose", "bigger_explosions"],
-    "forbidden": ["compound_interest", "side_flip", "side_kick"],
-    "minScore": 23200
   },
   "Coal": {
     "required": ["extra_life", "side_kick", "side_flip"],
