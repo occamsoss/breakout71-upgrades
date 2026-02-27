@@ -34,7 +34,18 @@ def paginate_details(results, code_to_real, code_to_category):
     while i < n:
         chunk = results[i:i+TOP_K]
 
-        for combo, missing, *_ in chunk:
+        for opt in chunk:
+            # detect tuple shape
+            if len(opt) >= 3 and isinstance(opt[2], dict):
+                # unlock mode: (combo, unlocked, missing)
+                combo, unlocked, missing = opt[:3]
+            elif len(opt) >= 2 and isinstance(opt[1], dict):
+                # almost mode: (combo, missing, ...)
+                combo, missing = opt[0], opt[1]
+            else:
+                # unexpected — skip safely
+                continue
+
             print("\nFor combo:", ", ".join(code_to_real[u] for u in combo))
             show_details(combo, missing, code_to_real, code_to_category)
 
