@@ -35,15 +35,20 @@ def paginate_details(results, code_to_real, code_to_category):
         chunk = results[i:i+TOP_K]
 
         for opt in chunk:
-            # detect tuple shape
-            if len(opt) >= 3 and isinstance(opt[2], dict):
-                # unlock mode: (combo, unlocked, missing)
-                combo, unlocked, missing = opt[:3]
-            elif len(opt) >= 2 and isinstance(opt[1], dict):
-                # almost mode: (combo, missing, ...)
-                combo, missing = opt[0], opt[1]
-            else:
-                # unexpected — skip safely
+            combo = opt[0]
+            missing = None
+
+            # find the dict whose values are sets → missing map
+            for part in opt[1:]:
+                if isinstance(part, dict):
+                    # check value type
+                    if part and all(isinstance(v, set) for v in part.values()):
+                        missing = part
+                        break
+
+            if missing is None:
+                print("\nFor combo:", ", ".join(code_to_real[u] for u in combo))
+                print("No level requirement details available.")
                 continue
 
             print("\nFor combo:", ", ".join(code_to_real[u] for u in combo))
@@ -310,6 +315,10 @@ def recommend(chosen, available, max_picks, levels, code_to_category):
 # -------------------------------------------------
 
 def show_details(combo, missing, code_to_real, code_to_category):
+    if not isinstance(missing, dict):
+        print("No level requirement details available.")
+        return
+
     print("\n=== LEVEL DETAILS ===\n")
 
     # sort levels by number of missing upgrades
