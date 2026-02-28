@@ -1,14 +1,4 @@
 {
-  "Abstract 10": {
-    "minScore": 11900,
-    "required": ["transparency", "ball_attract_ball", "left_is_lava"],
-    "forbidden": ["pierce_color", "rainbow", "passive_income"]
-  },
-  "Abstract 13": {
-    "minScore": 12400,
-    "required": ["ball_attract_ball", "streak_shots", "ghost_coins"],
-    "forbidden": ["passive_income", "sacrifice", "picky_eater"]
-  },
   "Abstract 14": {
     "minScore": 12500,
     "required": ["smaller_puck", "asceticism", "rainbow"],
@@ -134,20 +124,10 @@
     "forbidden": ["transparency", "left_is_lava", "pierce_color"],
     "minScore": 20100
   },
-  "Santa Claus": {
-    "required": ["rainbow", "superhot", "right_is_lava"],
-    "forbidden": ["happy_family", "ghost_coins", "sturdy_bricks"],
-    "minScore": 20300
-  },
   "Snowglobe": {
     "required": ["wind", "viscosity", "ghost_coins"],
     "forbidden": ["rainbow", "buoy", "coin_magnet"],
     "minScore": 10000
-  },
-  "Freddie Mercury": {
-    "required": ["rainbow", "bigger_explosions", "double_or_nothing"],
-    "forbidden": [],
-    "minScore": 15000
   },
   "67": {
     "required": ["bricks_attract_ball", "asceticism", "double_or_nothing"],
@@ -163,11 +143,6 @@
     "required": ["reach", "fountain_toss", "picky_eater"],
     "forbidden": ["chill", "clairvoyant", "ghost_coins"],
     "minScore": 21300
-  },
-  "Better half": {
-    "required": ["rainbow", "reach", "chill"],
-    "forbidden": ["ghost_coins", "picky_eater", "respawn"],
-    "minScore": 21400
   },
   "Effeuiller la marguerite": {
     "required": ["nbricks", "fountain_toss", "slow_down"],
@@ -188,11 +163,6 @@
     "required": ["picky_eater", "fountain_toss", "ghost_coins"],
     "forbidden": ["clairvoyant", "passive_income", "corner_shot"],
     "minScore": 22600
-  },
-  "Dots 2": {
-    "required": ["viscosity", "concave_puck", "pierce"],
-    "forbidden": ["limitless", "ottawa_treaty", "sapper"],
-    "minScore": 22800
   },
   "Italia": {
     "required": ["wrap_right", "streak_shots", "right_is_lava"],
@@ -217,11 +187,6 @@
   "E. Aster Bunnymund": {
     "required": ["wrap_up", "yoyo", "shocks", "sturdy_bricks"],
     "forbidden": ["slow_down", "pierce"],
-    "minScore": 12000
-  },
-  "Easter bell": {
-    "required": ["ball_attracts_coins", "bigger_explosions", "bigger_puck"],
-    "forbidden": ["hot_start", "pierce", "limitless"],
     "minScore": 12000
   },
   "Construction site": {
