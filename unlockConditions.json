@@ -74,11 +74,6 @@
     "forbidden": ["implosions", "limitless", "fountain_toss"],
     "minScore": 17500
   },
-  "Crosshair 2": {
-    "required": ["sapper", "ottawa_treaty", "bigger_explosions"],
-    "forbidden": ["pierce_color", "pierce", "bricks_attract_ball"],
-    "minScore": 2000
-  },
   "Tomato & Basil": {
     "required": ["fountain_toss", "trickledown", "golden_goose"],
     "forbidden": ["telekinesis", "reach", "coin_magnet"],
