@@ -84,11 +84,6 @@
     "forbidden": ["bricks_attract_coins", "metamorphosis", "slow_down"],
     "minScore": 18200
   },
-  "Never Gonna Give You Up": {
-    "required": ["respawn", "superhot", "sturdy_bricks"],
-    "forbidden": ["multiball", "pierce", "pierce_color"],
-    "minScore": 19877
-  },
   "Eruption": {
     "required": ["implosions", "happy_family", "golden_goose"],
     "forbidden": ["bigger_explosions", "bigger_puck", "telekinesis"],
