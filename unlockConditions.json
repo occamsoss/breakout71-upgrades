@@ -4,16 +4,6 @@
     "required": ["smaller_puck", "asceticism", "rainbow"],
     "forbidden": ["bricks_attract_ball", "soft_reset", "respawn"]
   },
-  "Blinky": {
-    "required": ["clairvoyant", "reach", "double_or_nothing"],
-    "forbidden": ["nbricks", "corner_shot", "smaller_puck"],
-    "minScore": 13300
-  },
-  "Gliders": {
-    "required": ["trampoline", "superhot", "bricks_attract_ball"],
-    "forbidden": ["reach", "rainbow", "ghost_coins"],
-    "minScore": 13600
-  },
   "Lone island": {
     "required": ["reach", "passive_income", "happy_family"],
     "forbidden": ["bigger_explosions", "wrap_right", "ghost_coins"],
@@ -64,11 +54,6 @@
     "forbidden": ["soft_reset", "compound_interest", "metamorphosis"],
     "minScore": 17300
   },
-  "missle": {
-    "required": ["double_or_nothing", "ball_attract_ball", "etherealcoins"],
-    "forbidden": ["trampoline", "forgiving", "golden_goose"],
-    "minScore": 17400
-  },
   "Iran": {
     "required": ["forgiving", "golden_goose", "viscosity"],
     "forbidden": ["implosions", "limitless", "fountain_toss"],
@@ -94,11 +79,6 @@
     "forbidden": ["hot_start", "addiction", "base_combo"],
     "minScore": 19000
   },
-  "Pumpkinhead and Black Cat": {
-    "required": ["hot_start", "metamorphosis", "superhot"],
-    "forbidden": ["transparency", "left_is_lava", "pierce_color"],
-    "minScore": 19300
-  },
   "Japan": {
     "required": ["addiction", "minefield", "trampoline"],
     "forbidden": ["ottawa_treaty", "right_is_lava", "ball_repulse_ball"],
@@ -109,20 +89,10 @@
     "forbidden": ["wrap_up", "pierce", "sturdy_bricks"],
     "minScore": 19900
   },
-  "Emoji Cry": {
-    "required": ["ball_attract_ball", "picky_eater", "double_or_nothing"],
-    "forbidden": ["transparency", "left_is_lava", "pierce_color"],
-    "minScore": 20100
-  },
   "Snowglobe": {
     "required": ["wind", "viscosity", "ghost_coins"],
     "forbidden": ["rainbow", "buoy", "coin_magnet"],
     "minScore": 10000
-  },
-  "67": {
-    "required": ["bricks_attract_ball", "asceticism", "double_or_nothing"],
-    "forbidden": ["reach", "ball_attract_ball", "chill"],
-    "minScore": 6767
   },
   "Couple": {
     "required": ["multiball", "ball_attract_ball", "happy_family"],
@@ -163,11 +133,6 @@
     "required": ["puck_repulse_ball", "ball_repulse_ball", "unbounded"],
     "forbidden": ["skip_last", "fountain_toss", "limitless"],
     "minScore": 23000
-  },
-  "Cyclone Thing": {
-    "required": ["bricks_attract_ball", "skip_last", "trampoline"],
-    "forbidden": ["shocks", "sapper", "respawn"],
-    "minScore": 23100
   },
   "Coal": {
     "required": ["extra_life", "side_kick", "side_flip"],
